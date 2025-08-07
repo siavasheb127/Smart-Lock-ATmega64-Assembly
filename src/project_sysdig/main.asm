@@ -1,0 +1,516 @@
+
+
+; SMART BEHEIVIORAL LIKE
+;Siavash Ebrahimi Kamal 
+
+
+.Include "M64DEF.INC"
+
+
+.org 0x0000
+    jmp main
+.org 0x0002
+    jmp INT0_ISR
+.org 0x0004
+    jmp INT1_ISR
+.org 0x0006
+    jmp INT2_ISR
+.org 0x0008
+    jmp INT3_ISR
+.org 0x000A
+    jmp INT4_ISR
+.org 0x0014
+    jmp TIMER2_OVF_ISR
+
+.org 0x0020
+    jmp TIMER0_OVF_ISR
+
+.org 0x0050
+
+; TIMER OF HOLDING : 
+; 0X1001 ==> LENGTH OF PASSWORD IN LEARNING 
+; 0X1002 ==> BIT1
+; 0X1003 ==> BIT2
+; 0X1004 ==> BIT3
+; 0X1005 ==> BIT4
+; 0X1006 ==> BIT5
+; 0X1007 ==> BIT6
+; 0X1008 ==> BIT7
+; 0X1009 ==> BIT8
+; 0X1010 ====> PASSWORD 0 1  
+; 0X1051 ==> LENGTH OF PASSWORD IN AUTHENTICATION 
+; 0X1052 ==> BIT1
+; 0X1053 ==> BIT2
+; 0X1054 ==> BIT3
+; 0X1055 ==> BIT4
+; 0X1056 ==> BIT5
+; 0X2057 ==> BIT6
+; 0X2058 ==> BIT7
+; 0X1059 ==> BIT8
+; 0X1060 ====> PASSWORD 0 1 
+
+
+main:
+    ;stack 
+    LDI R16, HIGH(RAMEND)
+    OUT SPH, r16
+    LDI R16, LOW(RAMEND)
+    OUT SPL, r16
+
+	;INT0-4 --> LOW EDGE
+    LDI R16, 0b10101010
+    STS EICRA, R16
+
+    ; falling edge  INT4
+	LDI R16 , 0X02
+    OUT EICRB, R16
+
+    ; Enable INT0 -- INT4
+    LDI R16, 0b00001111
+    OUT EIMSK, R16
+
+    ;Timer0:  Prescaler 1024 
+    LDI R16, 0x07
+    OUT TCCR0, R16
+	LDI R16 , 206
+	OUT TCNT0 , R16
+    ; Timer2: Prescaler 1024 (for LED)
+    LDI R16, 0x05
+    OUT TCCR2, R16
+    LDI r16, 206
+    OUT TCNT2, R16
+	; ENABLE TIMERS  ==> timer 2
+	LDI R16 , 0X40
+    OUT TIMSK, R16
+	;PORTA (LEDs )- PORTB (wrong counter)
+    LDI R16, 0b11111111
+    OUT DDRA, R16
+	OUT DDRC, R16; TEST
+    OUT DDRB, R16 
+
+
+	CLR R0  ; LENGTH OF LEARNING PASSWORD 
+	CLR R1  ; LENGTH OF AUTHENTICATION PASSWORD
+	CLR R3  ; CODE LEARNING
+	CLR R4  ; CODE AUTHENTICATION 
+    CLR R16 ; TEMP
+	CLR R17 ; OUTPUT PORT A
+	CLR R18 ; TEMP TIMER2 
+	CLR R19 ; MODE A 
+	CLR R20 ; TEMP TIMER0 
+	CLR R21 ; END OF LED
+	clr R22	; TYPE EDGE
+	clr R23 ; TYPE OF LEARNING OR AUTHENTICATION 
+	clr R25 ; WRONG COUNTER
+	LDI R26 , 0X02
+	LDI R27 , 0X10	; X POINTER ==> 0X0102 ### R27 = 01 & R26 = 02
+	LDI R28 , 0X52
+	LDI R29 , 0X10  ; Y POINTER ==> 0X0202 ### R29 = 02 & R28 = 02
+	CLR R30 ;  TYPE LEVEL OUT
+	CLR R31 ;  FLAG OF
+    SEI
+	;================================================================================================
+MAIN_LOOP:
+	OUT PORTA , R17 
+	JMP MAIN_LOOP
+	;========================================================================================================
+
+INT2_ISR:
+	LDI R19 , 0X01 ; led yellow
+	RETI
+		;========================================================================================================
+
+INT0_ISR:
+	CPI R23 , 0
+	BREQ  LEARNING
+	CPI R23 , 1
+	BREQ AUTHENTICATION 
+
+AUTHENTICATION : 
+	CPI R22 , 0  ; LOW EDGE OR HIGH EDGE
+	BREQ low_edge_int1
+	CPI R22 , 1  ; LOW EDGE OR HIGH EDGE
+	BREQ high_edge_int1
+low_edge_int1 :
+	LDI R16  ,206
+	OUT TCNT0 , R16
+	LDI R16 ,0X01
+	OUT TIMSK , R16
+	LDI R16 , 0b10101011
+	STS eicra , R16
+	LDI R22 , 1
+	RETI
+high_edge_int1 : 
+	ST Y+ , R20
+	INC R1
+	CPI R20 , 8 
+	BRCC ITS_ONE1 
+	BRCS ITS_ZERO1
+	ITS_ONE1 : 
+	LSL R4
+	INC R4
+	JMP CONTINUE1
+	ITS_ZERO1 :
+	LSL R4
+	CONTINUE1 : 
+	CLR R20 
+	LDI R16 ,0X01
+	OUT TIMSK , R16
+	LDI R16  ,206
+	OUT TCNT0 , R16
+	LDI R16 , 0b10101010
+	STS EICRA , R16
+	LDI R22 , 0 
+	RETI
+
+LEARNING : 
+	CPI R22 , 0  ; LOW EDGE OR HIGH EDGE
+	BREQ low_edge_int0
+	CPI R22 , 1 ; LOW EDGE OR HIGH EDGE
+	BREQ high_edge_int0
+low_edge_int0 :
+	LDI R16  ,206
+	OUT TCNT0 , R16
+	LDI R16 ,0X01
+	OUT TIMSK , R16
+	LDI R16 , 0b10101011
+	STS EICRA , R16
+	LDI R22 , 1
+	RETI
+high_edge_int0 : 
+	ST X+ , R20
+	INC R0
+	CPI R20 , 8 
+	BRCC ITS_ONE0 
+	BRCS ITS_ZERO0
+	ITS_ONE0 :
+	LSL R3 
+	INC R3
+	JMP CONTINUE0 
+
+	ITS_ZERO0 :
+	LSL R3
+
+	CONTINUE0 : 
+	CLR R20 
+	LDI R16 ,0X01
+	OUT TIMSK , R16
+	LDI R16  ,206
+	OUT TCNT0 , R16
+	LDI R16 , 0b10101010
+	STS EICRA , R16
+	LDI R22 , 0 
+	RETI
+	;========================================================================================================
+
+INT1_ISR:
+	LDI R19 , 3
+	LDI R23 , 1
+	RETI
+	;========================================================================================================
+
+
+INT3_ISR:
+	CPI R22 , 0  ; LOW EDGE OR HIGH EDGE
+	BREQ low_edge_int3
+	CPI R22 , 1  ; LOW EDGE OR HIGH EDGE
+	BREQ high_edge_int3
+low_edge_int3 :
+	LDI R16, 0b00010000
+	OUT EIMSK , R16
+	LDI R22, 0X00
+	RETI
+high_edge_int3 :
+	LDI R16 , 0b10101010
+	STS EICRA , r16
+	LDI R22 , 0 
+	clr R25
+	OUT PORTB , R25 
+	ldi R19  , 0 
+	ldi R16  , 0x40 
+	out TIMSK , r16 
+	RETI
+
+		;========================================================================================================
+INT4_ISR:
+	CPI R22 , 0  ; LOW EDGE OR HIGH EDGE
+	BREQ low_edge_int4
+	CPI R22 , 1  ; LOW EDGE OR HIGH EDGE
+	BREQ high_edge_int4
+low_edge_int4 :
+	SEI
+	LDI R16  ,206
+	OUT TCNT0 , R16
+	LDI R16 ,0X01
+	OUT TIMSK , R16
+	LDI R16 , 0b00000011 
+	STS EICRB , r16
+	LDI R22 , 1
+	RETI
+high_edge_int4 :
+	CPI R20 ,10 
+	BRCS IN_LOCK
+	CPI R20 , 20
+	BRCC IN_LOCK 
+	LDI R16 , 0b11101010
+	STS EICRA , R16
+	LDI R16 , 0b00001000
+	OUT EIMSK , R16 
+	RETI
+IN_LOCK : 
+	LDI R16 , 0b00001000
+	OUT EIMSK , R16
+	CLR R22
+	RETI
+		;========================================================================================================
+
+TIMER2_OVF_ISR :
+	CPI R19 , 0
+	BREQ  LED_GREEN_DUCY_50
+	CPI R19 , 1
+	BREQ LED_YELLOW
+	CPI R19 , 2
+	BREQ LED_WHITE
+	CPI R19 , 3 
+	BREQ LED_BLUE
+	CPI R19 , 4 
+	BREQ CORRECT
+	CPI R19 , 5 
+	BREQ WRONG_INPUT1 
+	CPI R19 , 6 
+	BREQ LOCK_MODE1
+	RETI
+ 	;##############################################################################################################
+LED_GREEN_DUCY_50 : 
+	LDI R16, 206
+	OUT TCNT2, R16 
+	CPI R30,1
+	BREQ HIGH_LEVEL0  
+	LDI R17 , 0X00
+	INC R18
+	CPI R18,10
+	BRNE NEXT0
+	CLR R18
+	LDI R30,1
+	RETI
+HIGH_LEVEL0:
+	LDI R17, 0x01
+	INC R18
+	CPI R18,10
+	BRNE NEXT0
+	CLR R30
+	CLR R18
+	RETI
+NEXT0:
+	RETI
+
+	;##############################################################################################################
+LED_YELLOW : 
+	LDI R17 , 0X02
+	OUT PORTA, R17
+	RETI
+
+WRONG_INPUT1:
+JMP WRONG_INPUT
+LOCK_MODE1 : 
+JMP LOCK_MODE
+	;##############################################################################################################
+LED_WHITE :
+	LDI R16, 206
+	OUT TCNT2, R16 
+	CPI R21 , 40
+	BRNE NOT_END_WHITE
+	CLR R21
+	LDI R19 , 0
+	JMP LED_GREEN_DUCY_50
+NOT_END_WHITE: 
+	CPI R30,1
+	BREQ HIGH_LEVEL2
+	LDI R17 , 0X00
+	INC R18
+	INC R21
+	CPI R18,5
+	BRNE NEXT2
+	CLR R18
+	LDI R30,1
+	RETI
+HIGH_LEVEL2:
+	INC R21
+	LDI R17, 0x04
+	INC R18
+	CPI R18,5
+	BRNE NEXT2
+	CLR R30
+	CLR R18
+	RETI
+NEXT2:
+	RETI
+
+	;##############################################################################################################
+LED_BLUE:
+	LDI R17 , 0X08
+	OUT PORTA, R17
+	
+	RETI
+
+	;##############################################################################################################
+
+CORRECT:
+	LDI R16, 206
+	OUT TCNT2, R16 
+
+	CPI R21 , 60
+	BRNE NOT_END_GREEN
+	LDI R21 , 0X00 
+	ldi R19 , 0
+	jmp LED_GREEN_DUCY_50
+NOT_END_GREEN: 
+	CPI R30,1
+	BREQ HIGH_LEVEL4
+	LDI R17 , 0X00
+	INC R18
+	INC R21
+	CPI R18 ,3
+	BRNE NEXT4
+	CLR R18
+	LDI R30,1
+	RETI
+
+HIGH_LEVEL4:
+	INC R21
+	LDI R17, 0x01
+	INC R18
+	CPI R18,7
+	BRNE NEXT4
+	CLR R30
+	CLR R18
+	RETI
+NEXT4:
+	RETI
+
+;##############################################################################################################
+WRONG_INPUT:
+	 
+	LDI R16, 206
+	OUT TCNT2, R16 
+
+	CPI R21 , 40
+	BRNE NOT_END_WRONG_INPUT
+	LDI R19 , 0X08
+	jmp LED_BLUE
+	NOT_END_WRONG_INPUT:
+	INC R21
+	LDI R17 , 0X10
+	OUT PORTA, R17
+	RETI
+;##############################################################################################################
+LOCK_MODE:
+	LDI R16, 156
+	OUT TCNT2, R16 
+	CPI R30,1
+	BREQ HIGH_LEVEL6
+	LDI R17 , 0X00
+	INC R18
+	CPI R18,8
+	BRNE NEXT6
+	CLR R18
+	LDI R30,1
+	RETI
+HIGH_LEVEL6:
+	LDI R17, 0x10
+	INC R18
+	CPI R18,12
+	BRNE NEXT6
+	CLR R30
+	CLR R18
+	RETI
+NEXT6:
+	RETI
+
+ 
+	
+	;========================================================================================================
+TIMER0_OVF_ISR :
+SEI
+	LDI R16  ,206
+	OUT TCNT0 , R16
+	INC R20
+	CPI R20 , 60 
+	BREQ CHOOSING_MODE_OF_CORNOMETER
+	RETI
+	CHOOSING_MODE_OF_CORNOMETER : 
+	CPI R23 , 0 
+	BREQ END_OF_LEARNING
+	CPI R23 , 1 
+	BREQ END_OF_AUTHENTICATION
+	RETI
+
+
+END_OF_LEARNING : 
+	LDI R16, 206
+	OUT TCNT2, R16
+	LDI R16, 0X40
+	OUT TIMSK, R16
+	OUT PORTC , R3 ; DEBUG
+	LDI R19 , 2
+	CLR R18
+	CLR R20 
+	
+	RETI
+
+END_OF_AUTHENTICATION: 
+	CLR R18
+	CLR R20
+	LDI R16, 206
+	OUT TCNT2, R16
+	LDI R16, 0X40
+	OUT TIMSK, R16
+	OUT PORTC , R4 ; DEBUG
+	CP R0 ,R1 
+	BRNE DIFFRENT_SIZE
+	BREQ SAME_SIZE 
+DIFFRENT_SIZE :
+	LDI R17  , 0X10
+	OUT PORTA , R17
+	CLR R1
+	INC R25
+	CLR R4  
+	OUT PORTB , R25
+	CPI R25 , 3
+	BREQ LOCK 
+	LDI R19 , 0
+RETI 
+SAME_SIZE : 
+	CP R3 , R4 
+	BREQ is_equal
+	INC R25 
+	CLR R4 
+	OUT PORTB , R25
+	LDI R19 , 5
+	JMP WRONG_INPUT
+	CPI R25 , 3
+	BREQ LOCK 
+	LDI R19 , 0
+	RETI
+
+is_equal : 
+	LDI R19, 4
+	LDI R16 , 0X0FF
+	OUT PORTC , R16
+	LDI R25 , 0X00
+	OUT PORTB , R25 
+	CLR R4 
+
+RETI
+
+LOCK : 
+	LDI R16 , 0b00001000
+	OUT EIMSK , R16
+	LDI R19 , 6
+	LDI R26  ,0X01
+	LDI R27 , 0X10	
+	OUT PORTB , R25
+
+	RETI
+
+

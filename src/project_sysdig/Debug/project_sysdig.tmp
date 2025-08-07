@@ -1,0 +1,80 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.7</VERSION>
+ <DEVICE>"ATmega64"</DEVICE>
+ <WORKING_DIR>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\m64def.inc</FILE>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.2.209\avrasm\inc\M64DEF.INC</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\Debug\project_sysdig.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>project_sysdig.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>project_sysdig.map</FILE>
+  <FILE>project_sysdig.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <main><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>53</LINE></main>
+  <INT0_ISR><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>123</LINE></INT0_ISR>
+  <INT1_ISR><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>206</LINE></INT1_ISR>
+  <INT2_ISR><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>118</LINE></INT2_ISR>
+  <INT3_ISR><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>213</LINE></INT3_ISR>
+  <INT4_ISR><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>235</LINE></INT4_ISR>
+  <TIMER2_OVF_ISR><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>267</LINE></TIMER2_OVF_ISR>
+  <TIMER0_OVF_ISR><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>433</LINE></TIMER0_OVF_ISR>
+  <MAIN_LOOP><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>113</LINE></MAIN_LOOP>
+  <LEARNING><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>166</LINE></LEARNING>
+  <AUTHENTICATION><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>129</LINE></AUTHENTICATION>
+  <low_edge_int1><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>134</LINE></low_edge_int1>
+  <high_edge_int1><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>143</LINE></high_edge_int1>
+  <ITS_ONE1><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>149</LINE></ITS_ONE1>
+  <ITS_ZERO1><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>153</LINE></ITS_ZERO1>
+  <CONTINUE1><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>155</LINE></CONTINUE1>
+  <low_edge_int0><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>171</LINE></low_edge_int0>
+  <high_edge_int0><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>180</LINE></high_edge_int0>
+  <ITS_ONE0><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>186</LINE></ITS_ONE0>
+  <ITS_ZERO0><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>191</LINE></ITS_ZERO0>
+  <CONTINUE0><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>194</LINE></CONTINUE0>
+  <low_edge_int3><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>218</LINE></low_edge_int3>
+  <high_edge_int3><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>223</LINE></high_edge_int3>
+  <low_edge_int4><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>240</LINE></low_edge_int4>
+  <high_edge_int4><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>250</LINE></high_edge_int4>
+  <IN_LOCK><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>260</LINE></IN_LOCK>
+  <LED_GREEN_DUCY_50><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>284</LINE></LED_GREEN_DUCY_50>
+  <LED_YELLOW><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>308</LINE></LED_YELLOW>
+  <LED_WHITE><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>318</LINE></LED_WHITE>
+  <LED_BLUE><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>350</LINE></LED_BLUE>
+  <CORRECT><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>358</LINE></CORRECT>
+  <WRONG_INPUT1><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>313</LINE></WRONG_INPUT1>
+  <LOCK_MODE1><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>315</LINE></LOCK_MODE1>
+  <HIGH_LEVEL0><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>296</LINE></HIGH_LEVEL0>
+  <NEXT0><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>304</LINE></NEXT0>
+  <WRONG_INPUT><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>392</LINE></WRONG_INPUT>
+  <LOCK_MODE><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>407</LINE></LOCK_MODE>
+  <NOT_END_WHITE><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>326</LINE></NOT_END_WHITE>
+  <HIGH_LEVEL2><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>337</LINE></HIGH_LEVEL2>
+  <NEXT2><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>346</LINE></NEXT2>
+  <NOT_END_GREEN><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>367</LINE></NOT_END_GREEN>
+  <HIGH_LEVEL4><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>379</LINE></HIGH_LEVEL4>
+  <NEXT4><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>388</LINE></NEXT4>
+  <NOT_END_WRONG_INPUT><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>401</LINE></NOT_END_WRONG_INPUT>
+  <HIGH_LEVEL6><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>419</LINE></HIGH_LEVEL6>
+  <NEXT6><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>427</LINE></NEXT6>
+  <CHOOSING_MODE_OF_CORNOMETER><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>441</LINE></CHOOSING_MODE_OF_CORNOMETER>
+  <END_OF_LEARNING><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>449</LINE></END_OF_LEARNING>
+  <END_OF_AUTHENTICATION><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>461</LINE></END_OF_AUTHENTICATION>
+  <DIFFRENT_SIZE><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>472</LINE></DIFFRENT_SIZE>
+  <SAME_SIZE><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>483</LINE></SAME_SIZE>
+  <LOCK><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>506</LINE></LOCK>
+  <is_equal><FILE>C:\Users\nilfam\OneDrive\Desktop\Siavash Ebrahimi Kamal - 40214333-sisdig2-project\project_sysdig\project_sysdig\main.asm</FILE><LINE>496</LINE></is_equal>
+ </LABELS>
+</ASSEMBLER_INFO>
